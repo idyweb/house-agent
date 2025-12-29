@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     Main application settings using Pydantic for validation and type safety.
     Values are automatically loaded from .env file
     """
+    environment: str
 
     database_url: str
     # Individual DB components (for Docker compose)

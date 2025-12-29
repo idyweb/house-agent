@@ -1,4 +1,3 @@
-from _typeshed import Self
 import uuid
 from datetime import datetime, timezone
 from sqlalchemy import DateTime, select
@@ -29,7 +28,7 @@ class BaseModel(Base):
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc)
+        default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc)
     )
 
@@ -38,10 +37,10 @@ class BaseModel(Base):
         db.add(self)
         return self
 
-    def remove(self, db Session):
+    def remove(self, db: Session):
         """Mark object for deletion without committing"""
         db.delete(self)
-        return Self
+        return self
 
     def insert(self, db_session: Session, commit=True):
         """Insert new object to db"""
